@@ -63,10 +63,11 @@ function App() {
     );
   };
 
-  // This function removes a todo from the list
+  // This function removes a todo from the list w verification
   const deleteTodo = (id) => {
-    // Filter out the todo with the matching id
-    setTodos(todos.filter((todo) => todo.id !== id));
+    if (window.confirm("Are you sure you want to delete this todo?")) {
+      setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+    }
   };
 
   return (
@@ -100,7 +101,7 @@ function App() {
               key={todo.id}
               todo={todo}
               onToggle={() => toggleTodo(todo.id)}
-              onDelete={() => deleteTodo(todo.id)}
+              onDelete={() => deleteTodo(todo.id)} // Passes the delete function to the TodoItem component
             />
           ))
         )}
