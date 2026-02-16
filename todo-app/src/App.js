@@ -35,6 +35,7 @@ function App() {
       id: Date.now(), // Unique ID based on current timestamp
       text: inputValue.trim(), // Trim whitespace from input
       completed: false, // New todos are not completed by default
+      created: Date.now(), // Timestamp when the todo was created
     };
 
     // Update the todos state with the new todo item
