@@ -85,15 +85,25 @@ function App() {
         <Button type="submit" text="Add Todo" />
       </form>
 
+      <div className="todo-stats">
+        <p>{todos.length} {todos.length === 1 ? "todo" : "todos"}</p>
+      </div>
+
       <div className="todo-list">
-        {todos.map((todo) => (
-          <ToDoItem
-            key={todo.id}
-            todo={todo}
-            onToggle={() => toggleTodo(todo.id)}
-            onDelete={() => deleteTodo(todo.id)}
-          />
-        ))}
+        {todos.length === 0 ? (
+          <div className="no-todos">
+            <p>No todos yet!</p>
+          </div>
+        ) : (
+          todos.map((todo) => (
+            <ToDoItem
+              key={todo.id}
+              todo={todo}
+              onToggle={() => toggleTodo(todo.id)}
+              onDelete={() => deleteTodo(todo.id)}
+            />
+          ))
+        )}
       </div>
     </div>
   );

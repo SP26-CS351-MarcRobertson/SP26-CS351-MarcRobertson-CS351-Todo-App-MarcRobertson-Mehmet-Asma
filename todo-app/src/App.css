@@ -96,3 +96,24 @@ button:hover {
   font-size: 16px;
   color: #333;
 }
+
+/* Todo statistics styling */
+.todo-stats {
+  padding: 12px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+/* No todos message styling */
+.no-todos {
+  text-align: center;
+  padding: 40px;
+  color: #999;
+}
+
+.no-todos p {
+  font-size: 18px;
+  margin: 0;
+}
