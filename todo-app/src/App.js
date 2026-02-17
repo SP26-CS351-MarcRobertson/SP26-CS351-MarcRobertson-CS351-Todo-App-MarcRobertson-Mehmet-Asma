@@ -16,6 +16,7 @@ function App() {
   const [inputValue, setInputValue] = useState("");
 
   const [filter, setFilter] = useState("All"); // State to track the current filter
+  const [priority, setPriority] = useState("Medium"); // State to track the selected priority
 
   // Function updates inputValue state when user types in input field
   const handleInputChange = (event) => {
@@ -38,6 +39,7 @@ function App() {
       text: inputValue.trim(), // Trim whitespace from input
       completed: false, // New todos are not completed by default
       created: Date.now(), // Timestamp when the todo was created
+      priority: priority, // Add priority to the todo object
     };
 
     // Update the todos state with the new todo item
@@ -45,6 +47,7 @@ function App() {
 
     // Clear the input field after adding the todo
     setInputValue("");
+    setPriority("Medium"); // Reset priority to default
   };
 
   // This function will toggle a todos complete status
@@ -105,6 +108,13 @@ function App() {
           placeholder="Enter a new todo"
           className="todo-input"
         />
+        
+        <select value={priority} onChange={(e) => setPriority(e.target.value)} className="priority-select">
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+
         <Button type="submit" text="Add Todo" />
       </form>
 
@@ -113,7 +123,7 @@ function App() {
           {filteredTodos.length} {filteredTodos.length === 1 ? "todo" : "todos"}
         </p>
       </div>
-
+    
       <div className="filter-buttons">
         {["All", "Active", "Completed"].map((option) => (
           <Button
