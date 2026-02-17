@@ -15,6 +15,8 @@ function App() {
   // inputValue string to store current input field
   const [inputValue, setInputValue] = useState("");
 
+  const [filter, setFilter] = useState("All"); // State to track the current filter
+
   // Function updates inputValue state when user types in input field
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -76,6 +78,17 @@ function App() {
     );
   };
 
+  // Filtered todos based on the current filter
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === "Active") return !todo.completed;
+    if (filter === "Completed") return todo.completed;
+    return true; // For "All"
+  });
+
+  const handleFilterChange = (newFilter) => {
+    setFilter(newFilter);
+  };
+
   return (
     <div className="App">
       <Header title="Todo List" />
@@ -88,29 +101,39 @@ function App() {
           placeholder="Enter a new todo"
           className="todo-input"
         />
-
         <Button type="submit" text="Add Todo" />
       </form>
 
       <div className="todo-stats">
         <p>
-          {todos.length} {todos.length === 1 ? "todo" : "todos"}
+          {filteredTodos.length} {filteredTodos.length === 1 ? "todo" : "todos"}
         </p>
       </div>
 
+      <div className="filter-buttons">
+        {["All", "Active", "Completed"].map((option) => (
+          <Button
+            key={option}
+            text={option}
+            onClick={() => handleFilterChange(option)}
+            className={filter === option ? "active-filter" : ""}
+          />
+        ))}
+      </div>
+
       <div className="todo-list">
-        {todos.length === 0 ? (
+        {filteredTodos.length === 0 ? (
           <div className="no-todos">
             <p>No todos yet!</p>
           </div>
         ) : (
-          todos.map((todo) => (
+          filteredTodos.map((todo) => (
             <ToDoItem
               key={todo.id}
               todo={todo}
               onToggle={() => toggleTodo(todo.id)}
-              onDelete={() => deleteTodo(todo.id)} // Passes the delete function to the TodoItem component
-              onEdit={editTodo} // Passes the edit function to the TodoItem component
+              onDelete={() => deleteTodo(todo.id)}
+              onEdit={editTodo}
             />
           ))
         )}

@@ -117,3 +117,13 @@ button:hover {
   font-size: 18px;
   margin: 0;
 }
+
+/* Filter buttons styling */
+.filter-buttons {
+  margin: 10px 0;
+}
+
+.active-filter {
+  background-color: #007bff; /* Change to your preferred active color */
+  color: white;
+}
