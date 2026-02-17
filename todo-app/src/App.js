@@ -89,6 +89,10 @@ function App() {
     setFilter(newFilter);
   };
 
+  const clearCompletedTodos = () => {
+    setTodos((prevTodos) => prevTodos.filter((todo) => !todo.completed));
+  };
+
   return (
     <div className="App">
       <Header title="Todo List" />
@@ -120,6 +124,11 @@ function App() {
           />
         ))}
       </div>
+
+      {/* Clear Completed Todos Button */}
+      {todos.some((todo) => todo.completed) && (
+        <Button text="Clear Completed" onClick={clearCompletedTodos} />
+      )}
 
       <div className="todo-list">
         {filteredTodos.length === 0 ? (
