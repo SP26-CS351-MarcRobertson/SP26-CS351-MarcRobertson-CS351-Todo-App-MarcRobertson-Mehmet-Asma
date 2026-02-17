@@ -1,5 +1,5 @@
 // Import readt and the useState hook for statement management
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // Import the CSS file for styling
 import "./App.css";
 
@@ -17,6 +17,19 @@ function App() {
 
   const [filter, setFilter] = useState("All"); // State to track the current filter
   const [priority, setPriority] = useState("Medium"); // State to track the selected priority
+
+  // Load todos from localStorage on app startup
+  useEffect(() => {
+    const storedTodos = localStorage.getItem("todos");
+    if (storedTodos) {
+      setTodos(JSON.parse(storedTodos));
+    }
+  }, []);
+
+  // Save todos to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   // Function updates inputValue state when user types in input field
   const handleInputChange = (event) => {
