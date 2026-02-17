@@ -70,6 +70,12 @@ function App() {
     }
   };
 
+  const editTodo = (id, newText) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) => (todo.id === id ? { ...todo, text: newText } : todo)),
+    );
+  };
+
   return (
     <div className="App">
       <Header title="Todo List" />
@@ -87,7 +93,9 @@ function App() {
       </form>
 
       <div className="todo-stats">
-        <p>{todos.length} {todos.length === 1 ? "todo" : "todos"}</p>
+        <p>
+          {todos.length} {todos.length === 1 ? "todo" : "todos"}
+        </p>
       </div>
 
       <div className="todo-list">
@@ -102,6 +110,7 @@ function App() {
               todo={todo}
               onToggle={() => toggleTodo(todo.id)}
               onDelete={() => deleteTodo(todo.id)} // Passes the delete function to the TodoItem component
+              onEdit={editTodo} // Passes the edit function to the TodoItem component
             />
           ))
         )}
