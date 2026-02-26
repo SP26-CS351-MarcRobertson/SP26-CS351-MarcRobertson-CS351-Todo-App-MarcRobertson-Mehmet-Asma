@@ -8,6 +8,8 @@ import Header from "./components/Header";
 import Button from "./components/Button";
 import ToDoItem from "./components/TodoItem";
 
+
+//This array stores all the todos, and this string stores whatever the user is typing in the input
 function App() {
   // State to hold the list of todo items
   const [todos, setTodos] = useState([]);
